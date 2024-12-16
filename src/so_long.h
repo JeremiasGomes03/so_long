@@ -6,12 +6,13 @@
 /*   By: jerda-si <jerda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 22:31:15 by jerda-si          #+#    #+#             */
-/*   Updated: 2024/12/13 20:07:10 by jerda-si         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:31:38 by jerda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -19,7 +20,10 @@
 # include <string.h>
 # include "../include/MLX42/MLX42.h"
 # include "../libraries/libft/libft.h"
+
 # define TILE_SIZE 64
+# define WIDTH 640
+# define HEIGHT 480
 
 typedef struct s_map
 {
@@ -40,5 +44,7 @@ typedef struct s_game
 	int				moves;
 	t_map			*map;
 }	t_game;
+
+void key_hook(mlx_key_data_t keydata, void *param);
 
 #endif
