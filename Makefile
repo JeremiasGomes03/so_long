@@ -7,7 +7,8 @@ FLAGSMLX := -ldl -lglfw -pthread -lm
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a
 SRCS	:= ./src/main.c \
-			./src/move.c
+			./src/move.c \
+			./src/maps.c
 
 OBJS	:= ${SRCS:.c=.o}
 

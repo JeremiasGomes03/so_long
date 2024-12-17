@@ -6,13 +6,13 @@
 /*   By: jerda-si <jerda-si@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:22:35 by jerda-si          #+#    #+#             */
-/*   Updated: 2024/12/16 19:30:44 by jerda-si         ###   ########.fr       */
+/*   Updated: 2024/12/16 19:39:46 by jerda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
     t_game game;
 
