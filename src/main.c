@@ -3,42 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerda-si <jerda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeremias <jeremias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 21:22:35 by jerda-si          #+#    #+#             */
-/*   Updated: 2024/12/16 19:39:46 by jerda-si         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:00:46 by jeremias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(void)
+void	free_grid(char **grid, int height)
 {
-    t_game game;
+	int	i;
 
-    //funcão para iniaci
-    //inicializa tudo
-    game.mlx = mlx_init(WIDTH, HEIGHT, "URSO F.D.P", true);
-    if (!game.mlx)
-        return (EXIT_FAILURE);
-    //carrega a imagem do personagem
-    mlx_texture_t *player_texture = mlx_load_png("./assets/urso.png");
-    if (!player_texture)
-    {
-        printf("Erro ao carregar a textura!\n");
-        return (EXIT_FAILURE);
-    }
-    game.player_img = mlx_texture_to_image(game.mlx, player_texture);
-    mlx_delete_texture(player_texture);
-   //add img na tela
-    mlx_image_to_window(game.mlx, game.player_img, 0, 0);
-    game.player_x = 0;
-    game.player_y = 0;
-    //registra a movimentação do personagem
-    mlx_key_hook(game.mlx, key_hook, &game);
-    //loop principal pra fazer tudo funcionar 
-    mlx_loop(game.mlx);
-    mlx_terminate(game.mlx);
-    return (EXIT_SUCCESS);
+	i = 0;
+	if (!grid)
+		return ;
+	while (i < height)
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
+}
+
+void	free_map(t_map *map)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (i < map->height)
+	{
+		free(map->grid[i]);
+		i++;
+	}
+	free(map->grid);
+	free(map);
+}
+
+void	cleanup_game(t_game *game)
+{
+	cleanup_textures(game);
+	free_map(game->map);
+}
+
+static int	is_end_dotber(char *map_file)
+{
+	int		i;
+
+	i = 0;
+	i = ft_strlen(map_file);
+	if (map_file[i - 1] != 'r')
+		return (0);
+	else if (map_file[i - 2] != 'e')
+		return (0);
+	else if (map_file[i - 3] != 'b')
+		return (0);
+	else if (map_file[i - 4] != '.')
+		return (0);
+	return (1);
+}
+
+int	main(int argc, char **argv)
+{
+	t_game	game;
+	
+	if (argc != 2 || !is_end_dotber(argv[1]))
+	{
+		ft_putstr_fd ("Error:\nUsage: ./so_long <map.ber>\n", 1);
+		return (0);
+	}
+	if (!init_game(&game, argv[1]))
+	{
+		cleanup_game(&game);
+		return (0);
+	}
+	render_map(&game);
+	mlx_key_hook(game.mlx, key_hook, &game);
+	mlx_set_icon(game.mlx, game.textures[5]);
+	mlx_loop(game.mlx);
+	return (0);
 }
 

@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerda-si <jerda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeremias <jeremias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 14:55:09 by jerda-si          #+#    #+#             */
-/*   Updated: 2024/11/07 20:05:59 by jerda-si         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:35:18 by jeremias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 # include <unistd.h>
 # include <stdlib.h>
 
+char            *get_next_line(int fd);
 void			*ft_memset(void *ptr, int value, size_t num);
 void			ft_bzero(void *s, size_t len);
 void			*ft_memcpy(void *dest, const void *src, size_t n);

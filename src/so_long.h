@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerda-si <jerda-si@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeremias <jeremias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 22:31:15 by jerda-si          #+#    #+#             */
-/*   Updated: 2024/12/16 17:31:38 by jerda-si         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:18:15 by jeremias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -20,13 +19,10 @@
 # include <string.h>
 # include "../include/MLX42/MLX42.h"
 # include "../libraries/libft/libft.h"
-
 # define TILE_SIZE 64
-# define WIDTH 640
-# define HEIGHT 480
 
 typedef struct s_map
-{
+{	
 	char	**grid;
 	int		width;
 	int		height;
@@ -45,6 +41,19 @@ typedef struct s_game
 	t_map			*map;
 }	t_game;
 
-void key_hook(mlx_key_data_t keydata, void *param);
+void		cleanup_textures(t_game *game);
+t_map		*read_map(const char *filename);
+void		render_tile(t_game *game, int x, int y);
+void		ft_find_char(char c, t_game *game);
+void		free_map(t_map *map);
+void		free_grid(char **grid, int height);
+int			validate_map(t_map *map, t_game *game);
+void		render_map(t_game *game);
+int			load_textures(t_game *game);
+void		key_hook(mlx_key_data_t keydata, void *param);
+int			init_game(t_game *game, char *map_file);	
+void		close_game(t_game *game);
+void		cleanup_game(t_game *game);
+int			validate_path(t_game *game);
 
 #endif

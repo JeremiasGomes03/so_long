@@ -8,7 +8,12 @@ HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a $(LIBFT)/libft.a
 SRCS	:= ./src/main.c \
 			./src/move.c \
-			./src/maps.c
+			./src/check_map.c \
+			./src/render_map.c \
+			./src/init_map.c\
+			./src/read_map.c \
+			./src/floodfill.c \
+
 
 OBJS	:= ${SRCS:.c=.o}
 
